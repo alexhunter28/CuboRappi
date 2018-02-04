@@ -1,0 +1,5 @@
+com\mycompany\rappi\Rappi.class
+com\mycompany\rappi\ejb\RappiFecade.class
+com\mycompany\rappi\ejb\RappiFecadeLocal.class
+com\mycompany\rappi\controller\RappiController.class
+com\mycompany\rappi\util\OperacionUtil.class

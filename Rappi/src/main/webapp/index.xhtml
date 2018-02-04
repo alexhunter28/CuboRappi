@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+    
+
+    <h:head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <title>Rappi</title>
+    </h:head>
+    <h:body>
+    	<h2>Rappi</h2>
+    	<h:form>
+            
+             <div class="panel panel-default">
+                <div class="panel-heading text-center header"><strong>CUBO</strong></div>
+                <div class="panel-body">
+                    
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <label for="casoPrueba">Número de casos:</label>
+                            <h:inputText id="casoPrueba" class="form-control" required="true" maxlength="2"
+                                         value="#{rappiController.numeroCasosPrueba}"
+                                         onkeypress="if(event.which &lt; 48 || event.which &gt; 57 ) if(event.which != 8) return false;"/>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label for="matriz">Valor N (Tamaño Matriz):</label>
+                            <h:inputText id="matriz" class="form-control" required="true" maxlength="2"
+                                         value="#{rappiController.valorN}"
+                                         onkeypress="if(event.which &lt; 48 || event.which &gt; 57 ) if(event.which != 8) return false;"/>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label for="iteracion">Valor M (Cantidad de operaciones):</label>
+                            <h:inputText id="iteracion" class="form-control" required="true" maxlength="2"
+                                         value="#{rappiController.valorM}"
+                                         onkeypress="if(event.which &lt; 48 || event.which &gt; 57 ) if(event.which != 8) return false;"/>
+                        </div>
+
+                        <div class="col-sm-3">
+                            <label for="operacion">Operación:</label>
+                            <h:selectOneMenu id="operacion" value="#{rappiController.operacion}" class="form-control" required="true">
+                                <f:selectItem itemValue = "Seleccione..." noSelectionOption="true" />
+                                <f:selectItem itemValue = "UPDATE" itemLabel="UPDATE" />
+                                <f:selectItem itemValue = "QUERY" itemLabel="QUERY" />
+                                
+                                <f:ajax listener="#{rappiController.cargarCampos(rappiController.operacion)}" 
+                                        event="change" render="pnlUpdate"
+                                             />
+                                
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                    
+                    <h:panelGroup id="pnlUpdate"  >
+                        <h:panelGroup rendered="#{rappiController.esUpdate}" >
+                        <div class="row">
+                            <div class="col-sm-3">
+                                <label  for="corX">Coordenada X:</label>
+                                <h:inputText id="corX" class="form-control" required="true" maxlength="2"
+                                             value="#{rappiController.x}"
+                                             onkeypress="if(event.which &lt; 48 || event.which &gt; 57 ) if(event.which != 8) return false;"/>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label for="corX">Coordenada Y:</label>
+                                <h:inputText id="corY" class="form-control" required="true" maxlength="2"
+                                             value="#{rappiController.y}"
+                                             onkeypress="if(event.which &lt; 48 || event.which &gt; 57 ) if(event.which != 8) return false;"/>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label for="corZ">Coordenada Z:</label>
+                                <h:inputText id="corZ" class="form-control" required="true" maxlength="2"
+                                             value="#{rappiController.z}"
+                                             onkeypress="if(event.which &lt; 48 || event.which &gt; 57 ) if(event.which != 8) return false;"/>
+                            </div>
+
+                            <div class="col-sm-3">
+                                <label for="corW">Coordenada W:</label>
+                                <h:inputText id="corW" class="form-control" required="true" maxlength="2"
+                                             value="#{rappiController.w}"
+                                             onkeypress="if(event.which &lt; 48 || event.which &gt; 57 ) if(event.which != 8) return false;"/>
+                            </div>
+
+                        </div>
+                        </h:panelGroup>
+                        
+                        <h:panelGroup rendered="#{rappiController.esQuery}" >
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label for="x1">X1:</label>
+                                    <h:inputText id="x1" class="form-control" required="true" maxlength="2"
+                                                 value="#{rappiController.x1}"
+                                                 onkeypress="if(event.which &lt; 48 || event.which &gt; 57 ) if(event.which != 8) return false;"/>
+                                </div>
+                                
+                                <div class="col-sm-2">
+                                    <label for="y1">Y1:</label>
+                                    <h:inputText id="y1" class="form-control" required="true" maxlength="2"
+                                                 value="#{rappiController.y1}"
+                                                 onkeypress="if(event.which &lt; 48 || event.which &gt; 57 ) if(event.which != 8) return false;"/>
+                                </div>
+                                
+                                <div class="col-sm-2">
+                                    <label for="z1">Z1:</label>
+                                    <h:inputText id="z1" class="form-control" required="true" maxlength="2"
+                                                 value="#{rappiController.z1}"
+                                                 onkeypress="if(event.which &lt; 48 || event.which &gt; 57 ) if(event.which != 8) return false;"/>
+                                </div>
+                                
+                                <div class="col-sm-2">
+                                    <label for="x2">X2:</label>
+                                    <h:inputText id="x2" class="form-control" required="true" maxlength="2"
+                                                 value="#{rappiController.x2}"
+                                                 onkeypress="if(event.which &lt; 48 || event.which &gt; 57 ) if(event.which != 8) return false;"/>
+                                </div>
+                                
+                                <div class="col-sm-2">
+                                    <label for="y2">Y2:</label>
+                                    <h:inputText id="y2" class="form-control" required="true" maxlength="2"
+                                                 value="#{rappiController.y2}"
+                                                 onkeypress="if(event.which &lt; 48 || event.which &gt; 57 ) if(event.which != 8) return false;"/>
+                                </div>
+                                
+                                <div class="col-sm-2">
+                                    <label for="z2">Z2:</label>
+                                    <h:inputText id="z2" class="form-control" required="true" maxlength="2"
+                                                 value="#{rappiController.z2}"
+                                                 onkeypress="if(event.which &lt; 48 || event.which &gt; 57 ) if(event.which != 8) return false;"/>
+                                </div>
+                                
+                            </div>
+                           
+                        </h:panelGroup>
+                        
+                        <div>
+                            <h:commandButton value="Agregar operación" actionListener="#{rappiController.agregarOperacion()}"  />
+                        </div>
+                        
+                    </h:panelGroup>
+                                        
+                </div>
+                    
+            
+            </div>
+            
+            
+            <div class="panel panel-default">
+                     <div class="panel-heading text-center header"><strong>LISTA DE OPERACIONES A EJECUTAR</strong></div>
+                     <div class="panel-body">
+                         
+                         <h:dataTable value = "#{rappiController.lstOperacion}" var = "opera" class="table table-striped table-bordered" cellspacing="0" width="100%">
+
+                                <h:column>    				
+                                   <f:facet name = "header">Operación</f:facet>    				
+                                   #{opera.tipo}
+                                </h:column>
+
+                                <h:column>
+                                   <f:facet name = "header">Valor 1</f:facet>
+                                   #{opera.v1}
+                                </h:column>
+
+                                <h:column>
+                                   <f:facet name = "header">Valor 2</f:facet>
+                                   #{opera.v2}
+                                </h:column>
+                             
+                                <h:column>
+                                   <f:facet name = "header">Valor 3</f:facet>
+                                   #{opera.v3}
+                                </h:column>
+                             
+                                <h:column>
+                                   <f:facet name = "header">Valor 4</f:facet>
+                                   #{opera.v4}
+                                </h:column>
+                             
+                                <h:column>
+                                   <f:facet name = "header">Valor 5</f:facet>
+                                   #{opera.v5}
+                                </h:column>
+                             
+                                <h:column>
+                                   <f:facet name = "header">Valor 6</f:facet>
+                                   #{opera.v6}
+                                </h:column>
+                                
+                             </h:dataTable>
+                         
+                         
+                     </div>
+                     
+            </div>
+            
+            
+            
+    	</h:form>
+    </h:body>
+</html>
